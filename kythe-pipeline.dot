@@ -1,0 +1,16 @@
+digraph K {
+rankdir=LR;
+"foo.cc" -> E1 -> "d86e960095.kindex" -> I1 -> e1 -> W1 -> GraphStore
+"bar.cc" -> E2 -> "8a0020e40a.kindex" -> I2 -> e2 -> W2 -> GraphStore
+GraphStore -> "write_tables" -> "ServingTable" -> "http_server"
+E1[label="PreprocessorFrontendAction\ncxx_extractor", shape=box]
+E2[label="cxx_extractor", shape=box]
+I1[label="ASTFrontendAction\ncxx_indexer", shape=box]
+I2[label="cxx_indexer", shape=box]
+e1[label="entries"]
+e2[label="entries"]
+W1[label="go/storage/tools\nwrite_entries", shape=box]
+W2[label="go/storage/tools\nwrite_entries", shape=box]
+"write_tables"[label="go/serving/tools\nwrite_tables", shape=box]
+"http_server"[shape=box]
+}
