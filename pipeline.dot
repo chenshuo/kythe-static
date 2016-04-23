@@ -1,0 +1,13 @@
+digraph K {
+rankdir=LR;
+"foo.cc" -> E1 -> "d86e960095.kindex" -> I1 -> e1 -> joiner -> leveldb -> printer -> HTML
+"bar.cc" -> E2 -> "8a0020e40a.kindex" -> I2 -> e2 -> joiner
+E1[label="kythe\ncxx_extractor", shape=box]
+E2[label="cxx_extractor", shape=box]
+I1[label="kythe\ncxx_indexer", shape=box]
+I2[label="cxx_indexer", shape=box]
+e1[label="entries"]
+e2[label="entries"]
+joiner[shape=box]
+printer[shape=box]
+}

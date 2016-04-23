@@ -1,0 +1,7 @@
+*.entries
+*.kindex
+*.o
+*.pb.h
+*.pb.cc
+*.swp
+a.out
