@@ -10,11 +10,9 @@
 
 // copied from DecodeStaticClaimTable in
 // kythe/cxx/common/indexing/frontend.cc
-void dumpEntries(const char* file)
+void dumpEntries(int fd)
 {
   using namespace google::protobuf::io;
-  int fd = open(file, O_RDONLY, S_IREAD | S_IWRITE);
-  GOOGLE_CHECK_GE(fd, 0) << "Couldn't open input file " << file;
   FileInputStream file_input_stream(fd);
   //GzipInputStream gzip_input_stream(&file_input_stream);
   CodedInputStream coded_input_stream(&file_input_stream);
@@ -32,11 +30,20 @@ void dumpEntries(const char* file)
     ++count;
   }
   printf("total %d\n", count);
-  close(fd);
 }
 
 int main(int argc, char* argv[])
 {
   if (argc > 1)
-    dumpEntries(argv[1]);
+  {
+    const char* file = argv[1];
+    int fd = open(file, O_RDONLY, S_IREAD | S_IWRITE);
+    GOOGLE_CHECK_GE(fd, 0) << "Couldn't open input file " << file;
+    dumpEntries(fd);
+    close(fd);
+  }
+  else
+  {
+    dumpEntries(STDIN_FILENO);
+  }
 }
